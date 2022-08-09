@@ -11,12 +11,13 @@ import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import WalletLink from "walletlink";
 import Web3 from 'web3';
+import Connectchain from './Chainconnect/connectchain'
 
 var web3 = null;
 var account = null;
 var vaultcontract = null;
 
-const moralisapikey = "2VBV4vaCLiuGu6Vu7epXKlFItGe3jSPON8WV4CrXKYaNBEazEUrf1xwHxbrIo1oM";
+const moralisapikey = "te5D2VeqIu5qQqzEPJkdPmfQfLrWqW4JPUtcw1kLzrkf7guPkTeQufrNgJmTX8xH";
 const providerOptions = {
 	binancechainwallet: {
 		package: true
@@ -24,14 +25,14 @@ const providerOptions = {
 	  walletconnect: {
 		package: WalletConnectProvider,
 		options: {
-		  infuraId: "3cf2d8833a2143b795b7796087fff369"
+		  infuraId: "d9474e45763e4d1e9e349d1a4353ffa1"
 		}
 	},
 	walletlink: {
 		package: WalletLink, 
 		options: {
-		  appName: "Net2Dev NFT Minter", 
-		  infuraId: "3cf2d8833a2143b795b7796087fff369",
+		  appName: "Get3Dev NFT", 
+		  infuraId: "d9474e45763e4d1e9e349d1a4353ffa1",
 		  rpc: "", 
 		  chainId: 4, 
 		  appLogoUrl: null, 
@@ -45,7 +46,7 @@ const web3Modal = new Web3Modal({
 	theme: "dark",
 	cacheProvider: true,
 	providerOptions 
-  });
+});
 
 export default function NFT() {
   const [apicall, getNfts] = useState([])
@@ -93,6 +94,9 @@ export default function NFT() {
       setLoadingState('loaded')
     } 
     if (loadingState === 'loaded' && !apicall.length) 
+    return(
+      <Connectchain />
+      )
     return (
           <h1 className="text-3xl">Wallet Not Connected</h1>)
     return (
@@ -109,11 +113,11 @@ export default function NFT() {
                     return (
                       <div className="card nft-card mt-3 mb-3" key={i} >
                         <div className="image-over">
-                          <img className="card-img-top" src={nftpng + nft.tokenId + '.png'} alt="" />
+                          <img className="card-img-top" src={nftpng + nft.tokenId + '.png'} alt="NFT Collection" />
                         </div>
                         <div className="card-caption col-12 p-0">
                           <div className="card-body">
-                            <h5 className="mb-0">Net2Dev Collection NFT #{nft.tokenId}</h5>
+                            <h5 className="mb-0">Get3Dev Collection NFT #{nft.tokenId}</h5>
                             <h5 className="mb-0 mt-2">Status<p style={{ color: "#39FF14", fontWeight: "bold", textShadow: "1px 1px 2px #000000" }}>Ready to Stake</p></h5>
                             <div className="card-bottom d-flex justify-content-between">
                               <input key={i} type="hidden" id='stakeid' value={nft.tokenId} />
